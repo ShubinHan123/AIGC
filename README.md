@@ -41,3 +41,14 @@
 
 > 本仓库所有项目仅用于个人展示，帮助面试官快速了解本人在 AI 应用、No-Code/Low-Code 工作流搭建、Web 前端开发等方面的动手能力与探索精神.
 
+## 参考资料
+
+- 抖音博主. “coze教程”. 抖音账号: @卢哥-AI
+- 抖音博主. “comfyui教程”. 抖音账号: @极简AI.
+-  **Skormino**. *Pixel Art Style "Illustrious"*. Civitai 模型，发布于 Civitai。链接：[https://civitai.com/models/1631459/pixel-art-style-illustrious-by-skormino](https://civitai.com/models/1631459/pixel-art-style-illustrious-by-skormino)。访问日期：2025‑07‑22。
+- **啦啦啦的小黄瓜**，《ComfyUI教程：大模型的下载、分类、架构讲解》，Bilibili 视频，2024‑07‑02，链接：https://www.bilibili.com/video/BV1e1421k7Gy/（访问日期：2025‑07‑22）。
+
+
+
+
+
