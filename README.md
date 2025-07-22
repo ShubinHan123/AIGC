@@ -33,15 +33,18 @@
 - **coze-心理学图文普及.txt**  
   使用 Coze 平台开发的心理学主题讲解和图文生成工作流，输入心理学相关主题后，可自动输出结构化科普内容和配图，适用于心理学科普、内容创作等需求。
 
+
+
+![Coze 工作流示例](images/psy-pic.png)
+
+
 - **comfyui-pixel-gen**
   使用 ComfyUI 工作流，结合 pixel art 风格模型，实现像素风格图片的自动生成。适合 AI 艺术创作、像素风格项目展示等应用场景。
 
-  ![comfyui-pixel-gen 工作流示例](images/confyui-pixel)
+  ![ComfyUI 工作流示例](images/confyui-pixel)
 
 
 
-
-![Dify 工作流示例](images/psy-pic.png)
 
 ---
 
