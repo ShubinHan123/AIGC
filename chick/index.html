@@ -1,0 +1,238 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chick Click Demo</title>
+  <style>
+    body {
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+      height: 100vh;
+      margin: 0;
+    }
+    .chick-container {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      user-select: none;
+    }
+    #chick-img {
+      width: 180px;
+      transition: box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .float-text {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: #ff4081;
+      font-family: 'Comic Sans MS', 'Arial', sans-serif;
+      pointer-events: none;
+      z-index: 250;
+      white-space: nowrap;
+      text-shadow: 2px 2px 8px #fff8;
+    }
+    /* 计数器 */
+    .counter-box {
+      position: fixed;
+      left: 50%;
+      top: 40px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.85);
+      border-radius: 16px;
+      box-shadow: 0 2px 8px #0001;
+      padding: 12px 36px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #222;
+      z-index: 200;
+      border: 1.5px solid #eee;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      letter-spacing: 1.5px;
+      user-select: none;
+      backdrop-filter: blur(3px);
+    }
+    .counter-kr {
+      color: #3666c6;
+      font-size: 19px;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+    .counter-cn {
+      color: #e15a22;
+      font-size: 17px;
+      font-weight: normal;
+    }
+    /* 底部 CA 框 */
+    .ca-box {
+      position: fixed;
+      left: 50%;
+      bottom: 32px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.7);
+      border-radius: 20px;
+      box-shadow: 0 4px 16px #0002;
+      padding: 18px 50px;
+      font-size: 28px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #222;
+      z-index: 10;
+      border: 2px solid #eee;
+      backdrop-filter: blur(3px);
+    }
+    /* 右上角按钮组 */
+    .top-right-buttons {
+      position: fixed;
+      top: 120px;
+      right: 50px;
+      z-index: 20;
+      display: flex;
+      gap: 14px;
+    }
+    .icon-btn {
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.82);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px #0001;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.12s;
+      font-size: 24px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .icon-btn:hover {
+      background: #ffd6e0;
+      transform: scale(1.1);
+    }
+    .icon-btn img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      display: block;
+      margin: 0;
+      padding: 0;
+      border-radius: 8px;
+    }
+    @media (max-width: 700px) {
+      .ca-box { font-size: 18px; padding: 8px 16px; bottom: 8px;}
+      .icon-btn { width: 36px; height: 36px; font-size: 18px;}
+      .top-right-buttons { top: 46px; right: 8px; }
+      .icon-btn img { width: 24px; height: 24px;}
+      .counter-box { font-size: 14px; padding: 7px 10px; top: 6px;}
+      .counter-kr { font-size: 13px; }
+      .counter-cn { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 右上角按钮 -->
+  <div class="top-right-buttons">
+    <a href="https://x.com" target="_blank" class="icon-btn" title="Twitter / X">
+      <img src="X.png" alt="Twitter/X" />
+    </a>
+    <a href="https://letsbonk.fun/" target="_blank" class="icon-btn" title="Bonk">
+      <img src="letbonk.png" alt="Bonk" />
+    </a>
+  </div>
+  <!-- 助力计数器 -->
+  <div class="counter-box">
+    <span class="counter-kr" id="count-kr">이미 힘을 보탰습니다: 0 회</span>
+  </div>
+  <!-- 中央小鸡 -->
+  <div class="chick-container">
+    <img id="chick-img" src="chick.png" alt="Chick">
+  </div>
+  <!-- 底部 CA 框 -->
+  <div class="ca-box">
+    CA: xxxxxxxxxxxxxxxxxxxxxxxxxxx
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    let scale = 1;
+    let clickCount = 0;
+    const koreanWords = ["치료"];
+    const chick = document.getElementById('chick-img');
+    const countKr = document.getElementById('count-kr');
+    const countCn = document.getElementById('count-cn');
+
+    window.speechSynthesis.onvoiceschanged = function() {};
+
+    function speak(text) {
+      const synth = window.speechSynthesis;
+      let voices = synth.getVoices();
+      let voice = voices.find(v => v.lang === "ko-KR") ||
+                  voices.find(v => v.lang === "zh-CN") ||
+                  voices.find(v => v.lang.startsWith("zh")) ||
+                  voices[0];
+      const utter = new SpeechSynthesisUtterance(text);
+      if (voice) utter.voice = voice;
+      utter.lang = voice ? voice.lang : "zh-CN";
+      utter.rate = 1.15;
+      utter.pitch = 1.7;
+      utter.volume = 1;
+      synth.cancel();
+      synth.speak(utter);
+    }
+
+    chick.onclick = function(e) {
+      // 次数+1并更新
+      clickCount++;
+      countKr.textContent = `이미 힘을 보탰습니다: ${clickCount} 회`;
+
+      // 播放TTS
+      speak("치료");
+
+      // 每次点放大
+      scale *= 1.3;
+      anime({
+        targets: chick,
+        scale: scale,
+        duration: 600,
+        easing: 'easeOutElastic(1, .8)'
+      });
+
+      // 随机取一个短句
+      const text = document.createElement('div');
+      text.className = 'float-text';
+      text.innerText = koreanWords[Math.floor(Math.random() * koreanWords.length)];
+
+      // 随机横向漂移
+      let offset = (Math.random() - 0.5) * 200;
+
+      // 加到body上
+      document.body.appendChild(text);
+
+      // 位置调整到小鸡正中央
+      let chickRect = chick.getBoundingClientRect();
+      text.style.left = `${chickRect.left + chickRect.width / 2 + window.scrollX}px`;
+      text.style.top = `${chickRect.top + chickRect.height / 2 + window.scrollY}px`;
+
+      // 飘字动画
+      anime({
+        targets: text,
+        translateY: -120,
+        translateX: offset,
+        opacity: [1, 0],
+        scale: [1.2, 1.6],
+        duration: 1500,
+        easing: 'easeOutCubic',
+        complete: () => { text.remove(); }
+      });
+    };
+  </script>
+</body>
+</html>

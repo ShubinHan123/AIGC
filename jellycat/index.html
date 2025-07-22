@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>图片宫格展示与放大保存</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body { background: #f3f4f6; margin: 0; font-family: system-ui,sans-serif;}
+    .container { max-width: 92%; margin: 20px auto; padding: 10px;}
+    h1 { margin-bottom: 24px; }
+    .bonk-image {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .img-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px #0002;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.2s;
+      aspect-ratio: 1 / 1;
+    }
+    .img-card:hover { transform: scale(1.04);}
+    .img-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: #eee;
+    }
+    .download-btn {
+      position: absolute;
+      right: 10px; bottom: 10px;
+      background: #000a;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      padding: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 18px;
+      line-height: 18px;
+    }
+    .img-card:hover .download-btn { opacity: 1;}
+    /* 放大图样式 */
+    .modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.76);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.2s;
+    }
+    .modal img {
+      max-width: 96vw; max-height: 90vh;
+      border-radius: 18px;
+      box-shadow: 0 0 24px #000c;
+      background: #fff;
+    }
+    .modal-close {
+      position: fixed; top: 28px; right: 40px;
+      color: #fff; font-size: 40px; cursor: pointer;
+      z-index: 10000;
+      user-select: none;
+    }
+    @media (max-width:600px) {
+      .container { padding: 4px; max-width: 96%; }
+      .grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <img src="images/bonk.png" class="bonk-image" alt="Bonk" onclick="showModal('images/bonk.png')">
+  <div class="container">
+    <div class="grid" id="gallery"></div>
+  </div>
+
+  <!-- 放大弹窗 -->
+  <div class="modal" id="modal" style="display:none;">
+    <span class="modal-close" id="closeModal">&times;</span>
+    <img id="modalImg" src="" alt="预览"/>
+  </div>
+
+  <script>
+    // 你的图片文件名（直接从 images 目录获取）
+    const images = [
+    "微信图片_2025-07-12_081912_236.jpg",
+    "微信图片_2025-07-12_081939_473.jpg",
+    "微信图片_2025-07-12_081947_425.jpg",
+    "微信图片_2025-07-12_081950_876.jpg",
+    "微信图片_2025-07-12_081954_159.jpg",
+    "微信图片_2025-07-12_081957_006.jpg",
+    //"微信图片_2025-07-12_081957_406.jpg",
+    "微信图片_2025-07-12_081959_981.jpg",
+    "微信图片_2025-07-12_082003_262.jpg",
+    "微信图片_2025-07-12_082143_831.jpg",
+    "微信图片_2025-07-12_082146_979.jpg",
+    "微信图片_2025-07-12_082149_993.jpg",
+    "微信图片_2025-07-12_082153_425.jpg",
+    "微信图片_2025-07-12_082156_196.jpg",
+    "微信图片_2025-07-12_082159_085.jpg",
+    "微信图片_2025-07-12_082201_856.jpg",
+    "微信图片_2025-07-12_082204_688.jpg",
+    "微信图片_2025-07-12_082207_455.jpg",
+    "微信图片_2025-07-12_082210_373.jpg",
+    "微信图片_2025-07-12_082324_686.jpg",
+    "微信图片_2025-07-12_082327_982.jpg",
+    "微信图片_2025-07-12_082330_531.jpg",
+    "微信图片_2025-07-12_082333_109.jpg",
+    "微信图片_2025-07-12_082336_196.jpg",
+    "微信图片_2025-07-12_082341_016.jpg",
+    "微信图片_2025-07-12_082343_857.jpg",
+    "微信图片_2025-07-12_082346_411.jpg",
+    "微信图片_2025-07-12_082349_759.jpg",
+    "微信图片_2025-07-12_082352_477.jpg",
+    "微信图片_2025-07-12_082355_384.jpg",
+    "微信图片_2025-07-12_082358_280.jpg",
+    "微信图片_2025-07-12_082401_024.jpg",
+    "微信图片_2025-07-12_082404_403.jpg",
+    "微信图片_2025-07-12_082407_154.jpg",
+    "微信图片_2025-07-12_082410_797.jpg",
+    "微信图片_2025-07-12_082413_243.jpg",
+    "微信图片_2025-07-12_082415_734.jpg"
+];
+
+    // 路径前缀（确保 images/ 在 index.html 同级）
+    const prefix = "images/";
+
+    // 渲染图片宫格
+
+  const gallery = document.getElementById('gallery');
+  images.forEach(name => {
+    const card = document.createElement('div');
+    card.className = 'img-card';
+
+    const img = document.createElement('img');
+    img.src = prefix + name;
+    img.alt = name;
+    // 恢复放大功能
+    img.onclick = () => showModal(prefix + name);
+
+    // 下载按钮 - 改进版本
+    const btn = document.createElement('a');
+    btn.className = "download-btn";
+    btn.title = "保存图片";
+    btn.innerHTML = "&#8681;"; // 下载箭头
+    btn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const link = document.createElement('a');
+      link.href = prefix + name;
+      link.download = name;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    card.appendChild(img);
+    card.appendChild(btn);
+    gallery.appendChild(card);
+  });
+
+  // 放大图预览逻辑
+  const modal = document.getElementById('modal');
+  const modalImg = document.getElementById('modalImg');
+  const closeModal = document.getElementById('closeModal');
+
+  function showModal(src) {
+    modalImg.src = src;
+    modal.style.display = 'flex';
+  }
+  closeModal.onclick = () => { modal.style.display = 'none'; }
+  modal.onclick = e => {
+    if (e.target === modal) modal.style.display = 'none';
+  }
+  window.addEventListener('keydown', (e) => {
+    if (modal.style.display === 'flex' && (e.key === "Escape" || e.key === "Esc")) modal.style.display = 'none';
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonk Music</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <!-- Page 1: Home Page -->
+    <div id="page1" class="page active">
+        <div class="home-container">
+            <img src="images/index.png" alt="Bonk Music" class="background-image" id="mainImage">
+            
+            <!-- 音乐按钮 -->
+            <div class="music-buttons">
+                <button class="music-btn" data-song="music/Bonk Revolution.mp3" style="top: 15%; left: 20%;">🎵</button>
+                <button class="music-btn" data-song="music/Bonk Revolution (1).mp3" style="top: 30%; right: 25%;">🎶</button>
+                <button class="music-btn" data-song="music/Chain of Light.mp3" style="bottom: 35%; left: 15%;">🎼</button>
+                <button class="music-btn" data-song="music/Chain of Light (1).mp3" style="top: 60%; left: 60%;">🎤</button>
+                <button class="music-btn" data-song="music/Code of Hearts.mp3" style="bottom: 25%; right: 30%;">🎧</button>
+                <button class="music-btn" data-song="music/Code of Hearts (1).mp3" style="top: 45%; left: 40%;">🎸</button>
+                <button class="music-btn" data-song="music/链上星光.mp3" style="bottom: 50%; left: 70%;">⭐</button>
+                <button class="music-btn" data-song="music/链上星光 (1).mp3" style="top: 25%; right: 15%;">✨</button>
+            </div>
+            
+            <!-- 音乐播放器 (隐藏) -->
+            <audio id="musicPlayer" loop></audio>
+        </div>
+    </div>
+
+    <!-- Page 2: Video Page -->
+    <div id="page2" class="page">
+        <div class="video-container">
+            <video id="mainVideo" autoplay muted loop class="main-video">
+                <source src="images/da9edf53-14bb-4bcc-a08b-1a191fcbd39b.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+            
+            <div class="video-overlay">
+                <!-- 右上角logo区域 -->
+                <div class="top-right-logos">
+                    <a href="https://letsbonk.fun/token/FaGP43mxpJayPDG3DUeemXfi6R97YabBU7dSEdpsbonk" target="_blank" class="logo-link">
+                        <img src="images/logo1-Photoroom.png" alt="Letsbonk" class="logo-btn logo1">
+                    </a>
+                    <a href="https://x.com/Bonkmusicbest" target="_blank" class="logo-link">
+                        <img src="images/X.png" alt="X (Twitter)" class="logo-btn logo-x">
+                    </a>
+                </div>
+                
+                <!-- 中下方logo -->
+                <div class="bottom-center-logo">
+                    <img src="images/loga2-Photoroom.png" alt="Bonk Music Logo" class="main-logo">
+                </div>
+                
+                <!-- 底部合约地址 -->
+                <div class="contract-address">
+                    <span class="ca-label">CA:</span>FaGP43mxpJayPDG3DUeemXfi6R97YabBU7dSEdpsbonk
+                </div>
+                
+                <div class="video-controls">
+                    <button id="playPauseBtn" class="control-btn">⏸️</button>
+                    <button id="musicToggleBtn" class="control-btn">🎵</button>
+                </div>
+                <div class="back-button" id="backButton">返回</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

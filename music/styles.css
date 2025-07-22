@@ -1,0 +1,584 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    background-color: #000;
+}
+
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    transition: opacity 0.8s ease;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 过渡动画遮罩层 */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* 背景图片样式 */
+.background-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100vh;
+    object-fit: contain; /* 保持原始图片比例 */
+    z-index: 1;
+}
+
+/* 首页样式 */
+.home-container {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    cursor: pointer;
+    background-color: #0a1128; /* 背景色，防止图片加载时出现空白 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 主图片搏动效果 */
+#mainImage {
+    animation: heartbeat 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 217, 0, 0.5));
+    transition: all 0.3s ease;
+}
+
+#mainImage:hover {
+    filter: drop-shadow(0 0 35px rgba(255, 217, 0, 0.9));
+}
+
+/* 音乐按钮样式 */
+.music-buttons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.music-btn {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4);
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    animation: musicFloat 3s ease-in-out infinite;
+    z-index: 15;
+}
+
+.music-btn:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 25px rgba(255, 217, 61, 0.6);
+}
+
+.music-btn.playing {
+    animation: musicFloat 3s ease-in-out infinite, pulse 1s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 217, 61, 0.8);
+}
+
+/* 音乐按钮飘动动画 */
+@keyframes musicFloat {
+    0% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+    25% {
+        transform: translate(20px, -15px) rotate(5deg);
+    }
+    50% {
+        transform: translate(-10px, -25px) rotate(-3deg);
+    }
+    75% {
+        transform: translate(-20px, 10px) rotate(7deg);
+    }
+    100% {
+        transform: translate(0px, 0px) rotate(0deg);
+    }
+}
+
+/* 不同按钮的个性化动画 */
+.music-btn:nth-child(1) { 
+    animation: musicFloat1 6s ease-in-out infinite;
+    animation-delay: 0s; 
+}
+.music-btn:nth-child(2) { 
+    animation: musicFloat2 7s ease-in-out infinite;
+    animation-delay: 0.8s; 
+}
+.music-btn:nth-child(3) { 
+    animation: musicFloat3 5.5s ease-in-out infinite;
+    animation-delay: 1.2s; 
+}
+.music-btn:nth-child(4) { 
+    animation: musicFloat4 6.5s ease-in-out infinite;
+    animation-delay: 1.8s; 
+}
+.music-btn:nth-child(5) { 
+    animation: musicFloat5 7.5s ease-in-out infinite;
+    animation-delay: 2.2s; 
+}
+.music-btn:nth-child(6) { 
+    animation: musicFloat6 5.8s ease-in-out infinite;
+    animation-delay: 2.8s; 
+}
+.music-btn:nth-child(7) { 
+    animation: musicFloat7 6.2s ease-in-out infinite;
+    animation-delay: 3.2s; 
+}
+.music-btn:nth-child(8) { 
+    animation: musicFloat8 7.2s ease-in-out infinite;
+    animation-delay: 3.8s; 
+}
+
+/* 每个按钮的独特飘动路径 */
+@keyframes musicFloat1 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    25% { transform: translate(25px, -20px) rotate(8deg); }
+    50% { transform: translate(-15px, -30px) rotate(-5deg); }
+    75% { transform: translate(-25px, 15px) rotate(10deg); }
+}
+
+@keyframes musicFloat2 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    33% { transform: translate(-30px, -10px) rotate(-8deg); }
+    66% { transform: translate(20px, -25px) rotate(6deg); }
+}
+
+@keyframes musicFloat3 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    20% { transform: translate(15px, -35px) rotate(12deg); }
+    40% { transform: translate(-20px, -15px) rotate(-7deg); }
+    60% { transform: translate(30px, 10px) rotate(9deg); }
+    80% { transform: translate(-10px, 20px) rotate(-4deg); }
+}
+
+@keyframes musicFloat4 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    30% { transform: translate(-25px, -25px) rotate(-10deg); }
+    70% { transform: translate(35px, -5px) rotate(8deg); }
+}
+
+@keyframes musicFloat5 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    25% { transform: translate(20px, 25px) rotate(6deg); }
+    50% { transform: translate(-30px, 5px) rotate(-9deg); }
+    75% { transform: translate(10px, -20px) rotate(7deg); }
+}
+
+@keyframes musicFloat6 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    40% { transform: translate(-15px, -30px) rotate(-6deg); }
+    80% { transform: translate(25px, 15px) rotate(11deg); }
+}
+
+@keyframes musicFloat7 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    33% { transform: translate(30px, -15px) rotate(9deg); }
+    66% { transform: translate(-20px, 25px) rotate(-8deg); }
+}
+
+@keyframes musicFloat8 {
+    0%, 100% { transform: translate(0px, 0px) rotate(0deg); }
+    25% { transform: translate(-35px, -10px) rotate(-12deg); }
+    50% { transform: translate(10px, -30px) rotate(5deg); }
+    75% { transform: translate(20px, 20px) rotate(8deg); }
+}
+
+.image-container {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.main-image {
+    max-width: 90%;
+    max-height: 90vh;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.glow {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    border-radius: 10px;
+    z-index: 1;
+    background: transparent;
+    box-shadow: 0 0 60px 15px rgba(255, 217, 0, 0.3);
+    opacity: 0;
+}
+
+.logo-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+.logo {
+    max-width: 120px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 217, 0, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 第二页视频样式 */
+.video-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000;
+}
+
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    gap: 15px;
+    pointer-events: auto;
+}
+
+.control-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+.control-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+/* 右上角logo区域 */
+.top-right-logos {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 11;
+    pointer-events: auto;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.logo-link:hover {
+    transform: scale(1.1);
+}
+
+.logo-btn {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.logo-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 中下方logo */
+.bottom-center-logo {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    pointer-events: none;
+}
+
+.main-logo {
+    height: 80px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+}
+
+/* 底部合约地址 */
+.contract-address {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    pointer-events: auto;
+    user-select: all;
+    cursor: text;
+    transition: all 0.3s ease;
+}
+
+.contract-address:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: rgba(255, 217, 0, 0.5);
+    transform: translateX(-50%) scale(1.02);
+}
+
+.ca-label {
+    color: #ffd700;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    right: 200px;
+    z-index: 10;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    pointer-events: auto;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.back-icon {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.7));
+}
+
+/* Animation Classes */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.wiggle {
+    animation: wiggle 3s ease-in-out infinite;
+}
+
+.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.rotate {
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes wiggle {
+    0%, 100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 心跳搏动动画 */
+@keyframes heartbeat {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: drop-shadow(0 0 15px rgba(255, 217, 0, 0.4));
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.06);
+        filter: drop-shadow(0 0 30px rgba(255, 217, 0, 0.8));
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        filter: drop-shadow(0 0 15px rgba(255, 217, 0, 0.4));
+    }
+}
+
+/* Page Transition Animation */
+.page-transition {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200vw;
+    height: 200vw;
+    background: radial-gradient(circle, #000 0%, #1a1a2e 50%, #16213e 100%);
+    z-index: 100;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-transition.active {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* 粒子特效 */
+.transition-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    pointer-events: none;
+}
+
+.particle-dot {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #ffd700;
+    border-radius: 50%;
+    animation: particleFloat 2s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(0);
+    }
+} 
