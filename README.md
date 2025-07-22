@@ -36,7 +36,7 @@
 ![Coze 工作流示例](images/psy-pic.png)
 
 
-- **comfyui-pixel-gen.json**
+- **comfyui-pixel-gen.json**   
   使用 ComfyUI 工作流，结合 pixel art 风格模型，实现像素风格图片的自动生成。适合 AI 艺术创作、像素风格项目展示等应用场景。
 
 ![ComfyUI 工作流示例](images/confyui-pixel.png)
