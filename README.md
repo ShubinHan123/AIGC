@@ -6,6 +6,11 @@
 
 ## 目录结构说明
 
+### 个人主页(https://brilliant-platypus-dcb2ff.netlify.app/)
+- **MyPages**
+使用AI编程工具GEM Design设计的个人信息网页版. 用于了解我的学历,项目,工作经验,爱好等信息,并且可以在内部发送消息到我的邮箱.
+
+
 ###  PDF实体关系提取（使用 Cursor 编写）
 - **Cursor_PDF_Extract**
 一个基于 FastAPI 和 React 的 Web 应用，用于处理 PDF 文档，提取实体信息并可视化展示实体之间的关系。
