@@ -6,7 +6,7 @@
 
 ## 目录结构说明
 
-### 个人主页(https://brilliant-platypus-dcb2ff.netlify.app/)
+### [个人主页](https://brilliant-platypus-dcb2ff.netlify.app/)
 - **MyPages**
 使用AI编程工具GEM Design设计的个人信息网页版. 用于了解我的学历,项目,工作经验,爱好等信息,并且可以在内部发送消息到我的邮箱.
 
