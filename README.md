@@ -6,6 +6,9 @@
 
 ## 目录结构说明
 
+###  PDF实体关系提取（使用 Cursor 编写）
+一个基于 FastAPI 和 React 的 Web 应用，用于处理 PDF 文档，提取实体信息并可视化展示实体之间的关系。
+
 ###  微信小程序（使用 Cursor 编写）
 
 - **caiciapp**
