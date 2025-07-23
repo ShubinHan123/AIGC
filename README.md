@@ -27,16 +27,14 @@
 
 ###  网站项目（使用 Cursor 编写）
 - **chick**  
-  简单产品推广网站。  
-  [在线访问 chick](https://rococo-strudel-710350.netlify.app/)
+  [简单产品推广网站](https://rococo-strudel-710350.netlify.app/) 
 
 - **jellycat**  
-  简单产品推广网站。  
-  [在线访问 jellycat](https://qiezongbonk.xyz/)
+  [简单产品推广网站](https://qiezongbonk.xyz/) 
+
 
 - **music**  
-  简单产品推广网站。  
-  [在线访问 music](https://visionary-piroshki-ce7f1d.netlify.app/)
+  [简单产品推广网站](https://visionary-piroshki-ce7f1d.netlify.app/)。  
 
 > 以上三个网站均为帮助朋友推销相关产品而制作，前端代码均使用 [Cursor](https://www.cursor.so/) 编辑器编写
 
