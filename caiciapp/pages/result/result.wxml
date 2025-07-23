@@ -1,0 +1,81 @@
+<!--result.wxml-->
+<navigation-bar title="游戏结果" back="{{false}}" color="white" background="transparent"></navigation-bar>
+
+<view class="result-container">
+  <!-- 结果标题 -->
+  <view class="result-header">
+    <text class="result-title">游戏结束</text>
+    <text class="result-subtitle">{{getResultMessage()}}</text>
+  </view>
+
+  <!-- 得分展示 -->
+  <view class="score-display">
+    <view class="final-score">
+      <text class="score-number">{{finalScore}}</text>
+      <text class="score-text">最终得分</text>
+    </view>
+  </view>
+
+  <!-- 游戏统计 */
+  <view class="stats-section">
+    <text class="stats-title">游戏统计</text>
+    
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">{{correctCount}}</text>
+        <text class="stat-label">猜对</text>
+      </view>
+      
+      <view class="stat-item">
+        <text class="stat-number">{{wrongCount}}</text>
+        <text class="stat-label">跳过</text>
+      </view>
+      
+      <view class="stat-item">
+        <text class="stat-number">{{totalCount}}</text>
+        <text class="stat-label">总词数</text>
+      </view>
+      
+      <view class="stat-item">
+        <text class="stat-number">{{accuracy}}%</text>
+        <text class="stat-label">准确率</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 难度信息 -->
+  <view class="level-info">
+    <text class="level-text">难度：{{getLevelText()}}</text>
+    <text class="level-desc">{{getLevelDesc()}}</text>
+  </view>
+
+  <!-- 评价信息 -->
+  <view class="evaluation">
+    <view class="evaluation-icon">{{getEvaluationIcon()}}</view>
+    <text class="evaluation-text">{{getEvaluationText()}}</text>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button class="action-btn replay-btn" bindtap="replayGame">
+      🔄 再来一局
+    </button>
+    
+    <button class="action-btn home-btn" bindtap="backToHome">
+      🏠 返回主页
+    </button>
+    
+    <button class="action-btn share-btn" bindtap="shareResult">
+      📤 分享成绩
+    </button>
+  </view>
+
+  <!-- 装饰元素 -->
+  <view class="decoration">
+    <view class="particle"></view>
+    <view class="particle"></view>
+    <view class="particle"></view>
+    <view class="particle"></view>
+    <view class="particle"></view>
+  </view>
+</view> 

@@ -1,0 +1,48 @@
+<!--game.wxml-->
+<view class="game-container">
+  <!-- 游戏头部信息 -->
+  <view class="game-header">
+    <view class="score-display">得分: {{score}}</view>
+    <view class="level-display">难度: {{levelText}}</view>
+  </view>
+
+  <!-- 词语显示区域 -->
+  <view class="word-section">
+    <text class="instruction">请将手机翻转，让其他人看到词语</text>
+    <view class="word-display" style="transform: rotate({{isRotated ? '180deg' : '0deg'}})">
+      <text class="current-word">{{currentWord}}</text>
+    </view>
+    <button class="rotate-btn" bindtap="toggleRotate">
+      {{isRotated ? '翻转回来' : '翻转屏幕'}}
+    </button>
+  </view>
+
+  <!-- 提示区域 -->
+  <view class="hint-section" wx:if="{{!isRotated}}">
+    <text class="hint-title">为持有者提供提示</text>
+    <view class="hint-buttons">
+      <button class="hint-btn" bindtap="showHint">显示提示</button>
+    </view>
+    
+    <!-- 提示内容 -->
+    <view class="hint-content" wx:if="{{showHint}}">
+      <text class="hint-text">{{currentHint}}</text>
+    </view>
+  </view>
+
+  <!-- 游戏控制按钮 -->
+  <view class="game-controls">
+    <button class="control-btn correct" bindtap="correctAnswer">
+      ✓ 猜对了 (+{{scorePerWord}}分)
+    </button>
+    <button class="control-btn wrong" bindtap="wrongAnswer">
+      ✗ 跳过 (-5分)
+    </button>
+    <button class="control-btn end" bindtap="endGame">结束游戏</button>
+  </view>
+
+  <!-- 游戏统计 -->
+  <view class="game-stats">
+    <text>猜对: {{correctCount}} | 跳过: {{wrongCount}} | 总分: {{score}}</text>
+  </view>
+</view> 

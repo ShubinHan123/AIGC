@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view class="container">
+  <!-- 游戏标题 -->
+  <view class="title-section">
+    <text class="title">疯狂猜词</text>
+    <text class="subtitle">团队合作，猜词游戏</text>
+  </view>
+
+  <!-- 难度选择 -->
+  <view class="difficulty-section">
+    <text class="section-title">选择难度</text>
+    <view class="difficulty-buttons">
+      <button 
+        class="difficulty-btn {{selectedLevel === 'basic' ? 'active' : ''}}"
+        bindtap="selectBasic">
+        基础难度
+        <text class="btn-desc">简单词汇，10分/词</text>
+      </button>
+      <button 
+        class="difficulty-btn {{selectedLevel === 'medium' ? 'active' : ''}}"
+        bindtap="selectMedium">
+        中级难度
+        <text class="btn-desc">常用词汇，15分/词</text>
+      </button>
+      <button 
+        class="difficulty-btn {{selectedLevel === 'advanced' ? 'active' : ''}}"
+        bindtap="selectAdvanced">
+        高级难度
+        <text class="btn-desc">复杂词汇，20分/词</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 当前选择 -->
+  <view class="current-selection">
+    <text>当前选择：{{getLevelText(selectedLevel)}}</text>
+  </view>
+
+  <!-- 游戏规则 -->
+  <view class="rules-section">
+    <text class="section-title">游戏规则</text>
+    <view class="rules-content">
+      <text class="rule-item">• 一人手持设备，其他人给出提示</text>
+      <text class="rule-item">• 可以使用文字提示帮助猜词</text>
+      <text class="rule-item">• 猜对得分，跳过扣分</text>
+      <text class="rule-item">• 难度越高，得分越多</text>
+    </view>
+  </view>
+
+  <!-- 开始游戏按钮 -->
+  <button class="start-btn" bindtap="startGame">开始游戏</button>
+</view>

@@ -1,0 +1,178 @@
+/* game.wxss */
+.game-container {
+  padding: 20rpx;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* 游戏头部 */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.score-display, .level-display {
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+/* 词语显示区域 */
+.word-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 30rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.instruction {
+  display: block;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 28rpx;
+  margin-bottom: 30rpx;
+}
+
+.word-display {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 25rpx;
+  padding: 60rpx 40rpx;
+  margin: 30rpx 0;
+  transition: all 0.5s ease;
+  box-shadow: 0 4rpx 15rpx rgba(0, 0, 0, 0.1);
+}
+
+.current-word {
+  font-size: 64rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.rotate-btn {
+  background: rgba(255, 255, 255, 0.8);
+  color: #667eea;
+  border: none;
+  border-radius: 25rpx;
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.rotate-btn::after {
+  border: none;
+}
+
+/* 提示区域 */
+.hint-section {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.hint-title {
+  display: block;
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.hint-buttons {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.hint-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: none;
+  border-radius: 15rpx;
+  padding: 25rpx;
+  font-size: 28rpx;
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.hint-btn::after {
+  border: none;
+}
+
+.hint-btn:active {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.hint-content {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15rpx;
+  padding: 30rpx;
+  margin-top: 20rpx;
+}
+
+.hint-text {
+  color: #333;
+  font-size: 32rpx;
+  line-height: 1.6;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 游戏控制按钮 */
+.game-controls {
+  margin-bottom: 30rpx;
+}
+
+.control-btn {
+  width: 100%;
+  border: none;
+  border-radius: 25rpx;
+  padding: 35rpx;
+  margin-bottom: 20rpx;
+  font-size: 36rpx;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.control-btn::after {
+  border: none;
+}
+
+.control-btn.correct {
+  background: #51cf66;
+  color: #fff;
+}
+
+.control-btn.wrong {
+  background: #ff6b6b;
+  color: #fff;
+}
+
+.control-btn.end {
+  background: #ffd43b;
+  color: #333;
+}
+
+.control-btn:active {
+  transform: translateY(2rpx);
+  opacity: 0.8;
+}
+
+/* 游戏统计 */
+.game-stats {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 15rpx;
+  padding: 25rpx;
+  text-align: center;
+}
+
+.game-stats text {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 28rpx;
+  font-weight: 500;
+} 
