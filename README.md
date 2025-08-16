@@ -29,7 +29,7 @@
 ###  网站项目（使用 Cursor 编写）
 - **[chick](https://rococo-strudel-710350.netlify.app/)**  
 
-**[pixel](https://rococo-strudel-710350.netlify.app/)**  
+- **[pixel](https://rococo-strudel-710350.netlify.app/)**  
 
 - **[music](https://lucky-seahorse-7677ac.netlify.app/)**  
   
