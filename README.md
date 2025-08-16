@@ -31,7 +31,7 @@
 
 - **[pixel](https://lucky-seahorse-7677ac.netlify.app/)**  
 
-- **[music](https://lucky-seahorse-7677ac.netlify.app/)**  
+- **[music](https://lambent-babka-a87633.netlify.app/)**  
   
 
 - **[jellycat](https://qiezongbonk.xyz/)**  
