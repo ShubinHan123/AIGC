@@ -27,15 +27,14 @@
 </p>
 
 ###  网站项目（使用 Cursor 编写）
-- **chick**  
-  [简单产品推广网站](https://rococo-strudel-710350.netlify.app/) 
+- **[chick](https://rococo-strudel-710350.netlify.app/)**  
 
-- **jellycat**  
-  [简单产品推广网站](https://qiezongbonk.xyz/) 
+**[pixel](https://rococo-strudel-710350.netlify.app/)**  
 
+- **[music](https://lucky-seahorse-7677ac.netlify.app/)**  
+  
 
-- **music**  
-  [简单产品推广网站](https://visionary-piroshki-ce7f1d.netlify.app/)。  
+- **[jellycat](https://qiezongbonk.xyz/)**  
 
 > 以上三个网站均为帮助朋友推销相关产品而制作，前端代码均使用 [Cursor](https://www.cursor.so/) 编辑器编写
 
